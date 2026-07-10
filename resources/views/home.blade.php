@@ -8,9 +8,9 @@
       @isset($chirps)
         @foreach ($chirps as $chirp)
           <div class="bg-base-100 card-body shadow">
-            <h1>{{ $chirp['author'] }}</h1>
+            <h1>{{ $chirp->user ? $chirp->user->name : 'Anon' }}</h1>
             <p>{{ $chirp['message'] }}</p>
-            <p>{{ new DateTime($chirp['time'])->format('j/F/Y') }}</p>
+            <p>{{ new DateTime($chirp->created_at)->format('j/F/Y h:m:s') }}</p>
           </div>
         @endforeach
       @endisset
