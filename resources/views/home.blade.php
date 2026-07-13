@@ -3,7 +3,8 @@
     Welcome
   </x-slot:title>
 
-  <div class="max-w-2xl mx-auto">
+  <div class="max-w-2xl space-y-8 mx-auto">
+    <x-create-chirp />
     <h1 class="text-3xl font-bold">Latest Chirps</h1>
 
     <div class="space-y-4 mt-8">
