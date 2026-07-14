@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chirp;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -20,6 +21,26 @@ class FormController extends Controller {
             Chirp::create([
                 "message" => $validated['chirp']
             ]);
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+            return redirect('/')->with("error", "Something went wrong");
+        }
+        return redirect('/')->with("success", "Chirp Uploaded Successfully!");
+    }
+    public function login(Request $request) {
+        if (Auth::check()) {
+            return redirect('/');
+        }
+        $credentials = $request->validate([
+            'email' => 'email|required',
+            'password' => 'required'
+        ]);
+        log::info($credentials);
+        try {
+            if (Auth::attempt($credentials, true)) {
+                $request->session()->regenerate();
+                return redirect('/');
+            }
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             return redirect('/')->with("error", "Something went wrong");
