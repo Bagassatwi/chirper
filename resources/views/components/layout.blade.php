@@ -17,10 +17,19 @@
         {{ $title ?? '🐦 Chirper' }}
       </a>
     </div>
-    <div class="navbar-end gap-2">
-      <a href="/login" class="btn btn-ghost btn-sm">Sign In</a>
-      <a href="#" class="btn btn-primary btn-sm">Sign Up</a>
-    </div>
+    @auth
+
+      <div class="navbar-end gap-2">
+        <p class="">Welcome back, {{ Auth::user()->name }}</p>
+      </div>
+    @endauth
+
+    @guest
+      <div class="navbar-end gap-2">
+        <a href="/login" class="btn btn-ghost btn-sm">Sign In</a>
+        <a href="#" class="btn btn-primary btn-sm">Sign Up</a>
+      </div>
+    @endguest
   </nav>
 
   <main class="flex-1 flex items-center justify-center container px-4 py-8">
