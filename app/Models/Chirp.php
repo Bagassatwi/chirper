@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Chirp extends Model
-{
+class Chirp extends Model {
     use SoftDeletes, HasFactory, HasUuids;
     // protected function casts(): array
     // {
@@ -20,11 +19,11 @@ class Chirp extends Model
     // }
 
     protected $fillable = [
-        "message"
+        "message",
+        'user_id'
     ];
 
-    public function user()
-    {
+    public function user() {
         return $this->belongsTo(User::class);
     }
 }
