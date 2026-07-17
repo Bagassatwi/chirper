@@ -11,7 +11,7 @@ class ChirpController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
-        $chirps = Chirp::select(['user_id', 'created_at', 'message'])->with('user:id,name')->orderBy('created_at', 'desc')->get();
+        $chirps = Chirp::select(['id', 'user_id', 'created_at', 'message'])->with('user:id,name')->orderBy('created_at', 'desc')->get();
         return view('home', ["chirps" => $chirps]);
     }
 
@@ -54,6 +54,8 @@ class ChirpController extends Controller {
      * Remove the specified resource from storage.
      */
     public function destroy(string $id) {
-        //
+        Chirp::destroy($id);
+
+        return redirect('/')->with('success', 'Chirp deleted!');
     }
 }
