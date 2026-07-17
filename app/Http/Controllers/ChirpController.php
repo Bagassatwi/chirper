@@ -11,7 +11,7 @@ class ChirpController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
-        $chirps = Chirp::select(['user_id', 'created_at', 'message'])->with('user:id,name')->get();
+        $chirps = Chirp::select(['user_id', 'created_at', 'message'])->with('user:id,name')->orderBy('created_at', 'desc')->get();
         return view('home', ["chirps" => $chirps]);
     }
 
